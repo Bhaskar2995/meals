@@ -14,18 +14,25 @@ class MealDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _showInfoMessage(String message) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(message)));
+    }
+
     return Scaffold(
       appBar: AppBar(title: Text(meal.title), actions: [
         IconButton(
             onPressed: () {
               List<Meal> favoriteMeals = allFavMeals;
               final isExisting = favoriteMeals.contains(meal);
-              print('is existing -- ${isExisting}');
 
               if (isExisting) {
                 favoriteMeals.remove(meal);
+                _showInfoMessage('Removed from favorites');
               } else {
                 favoriteMeals.add(meal);
+                _showInfoMessage('Added to favorites');
               }
 
               addFavMeals = favoriteMeals;
