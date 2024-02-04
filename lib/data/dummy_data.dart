@@ -406,3 +406,13 @@ const dummyMeals = [
     isLactoseFree: true,
   ),
 ];
+
+List<Meal> _favoriteMeals = [];
+
+List<Meal> get allFavMeals {
+  return _favoriteMeals;
+}
+
+set addFavMeals(List<Meal> meals) {
+  _favoriteMeals = meals;
+}

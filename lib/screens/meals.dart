@@ -3,10 +3,16 @@ import 'package:meals/models/meal.dart';
 import 'package:meals/widgets/meal_item.dart';
 
 class MealsSceen extends StatelessWidget {
-  const MealsSceen({super.key, required this.title, required this.meals});
+  const MealsSceen({
+    super.key,
+    this.title,
+    required this.meals,
+    // required this.onToggleFavorite,
+  });
 
-  final String title;
+  final String? title;
   final List<Meal> meals;
+  // final void Function(Meal meal) onToggleFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +42,20 @@ class MealsSceen extends StatelessWidget {
       );
     } else {
       content = ListView.builder(
-          itemCount: meals.length,
-          itemBuilder: (ctx, index) => MealItem(meal: meals[index]));
-    }
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
+        itemCount: meals.length,
+        itemBuilder: (ctx, index) => MealItem(
+          meal: meals[index],
+          // onToggleFavorite: onToggleFavorite,
         ),
-        body: content);
+      );
+    }
+
+    return title == null
+        ? content
+        : Scaffold(
+            appBar: AppBar(
+              title: Text(title!),
+            ),
+            body: content);
   }
 }
